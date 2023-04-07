@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+    background-color: rgb(211, 210, 210);
+}
+
+.ant-upload.ant-upload-select{
+    width: 250px !important;
+    height: 250px !important;
+    border-radius: 10px !important;
+    background-color: white !important;
+}

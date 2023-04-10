@@ -6,9 +6,121 @@ body{
     background-color: rgb(211, 210, 210);
 }
 
-.ant-upload.ant-upload-select{
+.upload-button > .ant-upload{
     width: 250px !important;
     height: 250px !important;
     border-radius: 10px !important;
     background-color: white !important;
+}
+
+.ant-btn-primary {
+    color: #fff;
+    border-color: #1890ff;
+    background: #1890ff;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.12);
+    box-shadow: 0 2px 0 rgba(0,0,0,.045);
+}
+
+/* Component EditContainer */
+.edit-container{
+    width: 100%;
+    height: 100%;
+}
+
+.left-size-container{
+    height: 100%;
+}
+
+.edit-main-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.edit-main-header{
+    padding: 0 10px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 65px;
+    border-bottom: 1px solid #ebedf5;
+    background: #fff;
+}
+.edit-main-header-left-size{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.edit-main-header-right-size{
+    display: flex;
+    align-items: center;
+    justify-items: flex-end;
+}
+
+.edit-image-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    height: 100%;
+    width: 100%;
+    flex: 1
+}
+
+.image-holder{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    height: 400px;
+    background: #fff;
+    padding: 10px;
+    box-shadow: 0px 1px 4px rgb(0 0 0 / 15%);
+}
+
+/* Component LeftSizeBar */
+.edit-size-container{
+    background: #fff;
+    border-right: 1px solid #ebedf5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.edit-size-header{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 65px;
+    border-bottom: 1px solid #ebedf5;
+    padding: 20px;
+}
+
+.edit-size-content{
+    padding: 20px;
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+}
+
+.edit-card-container .card-head{
+    font-size: 11px;
+    font-weight: 600;
+    color: #8f95b3
+}
+
+.edit-card-container .card-content .palette-block{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.edit-card-container .card-content .palette-block .palette-block-title{
+    color: #596080;
+
 }

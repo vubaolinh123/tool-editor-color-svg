@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { Upload, message } from "antd"
+import { Button, Upload, message } from "antd"
 import {LoadingOutlined, PlusOutlined} from "@ant-design/icons"
 
-const Uploads = ({getUploadedFile, getUploadedSvgData}) => {
+const Uploads = ({getUploadedFile, getUploadedSvgData, size = "large"}) => {
     const [loading, setLoading] = useState(false)
 
     const beforeUpload = (file) => {
@@ -61,12 +61,14 @@ const Uploads = ({getUploadedFile, getUploadedSvgData}) => {
         </div>
     )
 
+    const smallUploadButton = <Button>Upload New SVG</Button>
 
-  return (
+
+  return size === "large" ? (
     <Upload
         name="avatar"
         listType="picture-card"
-        className=""
+        className="upload-button"
         showUploadList={false}
         beforeUpload={beforeUpload}
         onChange={handleChange}
@@ -74,6 +76,14 @@ const Uploads = ({getUploadedFile, getUploadedSvgData}) => {
         {uploadButton}
     </Upload>
     
+  ) : (
+    <Upload className="upload-button-small"
+        showUploadList={false}
+        beforeUpload={beforeUpload}
+        onChange={handleChange}
+    >
+        {smallUploadButton}
+    </Upload>
   )
 }
 

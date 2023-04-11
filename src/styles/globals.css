@@ -49,12 +49,11 @@ body{
 .edit-main-header-left-size{
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    /* justify-content: flex-start; */
 }
 .edit-main-header-right-size{
-    display: flex;
-    align-items: center;
-    justify-items: flex-end;
+    text-align: right;;
+    /* justify-items: flex-end; */
 }
 
 .edit-image-container{

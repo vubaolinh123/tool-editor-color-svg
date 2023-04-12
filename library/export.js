@@ -26,7 +26,7 @@ export const dowloadSVGAsText = (svg) => {
   document.body.removeChild(a);
 };
 
-export const dowloadSVGAsImage = async (svg, {width, height}) => {
+export const dowloadSVGAsImage = async (svg, {width, height, name = 'download'}) => {
     const canvas = document.createElement('canvas');
     const img_to_download = document.createElement('img');
     img_to_download.src = svgToBase64(svg)
@@ -41,7 +41,7 @@ export const dowloadSVGAsImage = async (svg, {width, height}) => {
         }else{
             var a = document.createElement("a");
             const my_evt = new MouseEvent("click")
-            a.download = "download.png"
+            a.download = `${name}.png`
             a.type = "image/png";
             a.href = dataUrl;
             a.dispatchEvent(my_evt)

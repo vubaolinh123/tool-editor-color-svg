@@ -121,5 +121,26 @@ body{
 
 .edit-card-container .card-content .palette-block .palette-block-title{
     color: #596080;
+}
 
+/* Components ColorPill */
+.color-pill-container{
+    width: 22px;
+    height: 22px;
+    border-radius: 50px;
+    border: 2px solid rgb(0 0 0 / 10%)
+}
+
+.color-pill-popover .ant-popover-placement-bottom{
+    padding-top: 2px;
+}
+
+.color-pill-popover .ant-popover-inner{
+    border-radius: 5px;
+    box-shadow: none;
+    background: none;
+}
+
+.color-pill-popover .ant-popover-inner-content{
+    padding: 0;
 }

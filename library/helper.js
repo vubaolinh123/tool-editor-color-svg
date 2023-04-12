@@ -19,7 +19,7 @@ const getAllRgbColors = (svgString) => {
 const getColorsFromStyleFill = (svgString) => {
   let colors = [];
   if (svgString) {
-    svgString.replace(/(#[abcdef0-9]{3,6})/gi, () => {
+    svgString.replace(/(#[abcdef0-9]{3,6})/gi, (v, c) => {
       colors.push(c);
       return v;
     });

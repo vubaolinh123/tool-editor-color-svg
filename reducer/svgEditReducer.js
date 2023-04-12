@@ -6,6 +6,7 @@ import {
   MAKE_HISTORY,
   OPEN_EXPORT_MODAL,
   ORIGINAL_SVG_MAPPER,
+  ORIGINAL_SVG_STRING,
   PALETTES,
   REDO,
   RESET_IMAGE,
@@ -20,7 +21,7 @@ import {
 import { hexToRgbObj, rbgToHex } from "../library/colorConver";
 import { closestColor } from "../library/colorDiff";
 
-const initialState = {
+export const initialState = {
   originalSvg: null,
   updateSvg: null,
   imageUrl: null,
@@ -33,9 +34,9 @@ const initialState = {
   palettes: [],
 };
 
-export default svgEditReducer = (state = initialState, action) => {
+export const svgEditReducer = (state = initialState, action) => {
   return produce(state, (draft) => {
-    switch (Selection.type) {
+    switch (action.type) {
       case IMAGE_URL:
         draft.imageUrl = action.payload;
         break;

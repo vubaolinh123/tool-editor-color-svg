@@ -11,6 +11,6 @@ export const hexToRgbObj = (input) =>{
     }
 }
 
-export const rbgToHex = (input) =>{
-    return convert.rbg.hex(input)
+export const rgbToHex = (input) =>{
+    return convert.rgb.hex(input)
 }

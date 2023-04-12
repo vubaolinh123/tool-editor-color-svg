@@ -1,8 +1,9 @@
-import { Space, Divider, Typography } from "antd";
+import { Space, Divider, Typography, Button } from "antd";
 import React, { useContext } from "react";
 import SvgEditContext from "../../context/svgEditContex";
-import { MAKE_HISTORY, UPDATE_COLOR_MAPPER } from "../../constants/actionTypes";
+import { APPLY_PALETTE, MAKE_HISTORY, UPDATE_COLOR_MAPPER } from "../../constants/actionTypes";
 import ColorPill from "../ColorPill/colorPill";
+import ColorGroup from "../UI/ColorGroup/ColorGroup";
 
 const { Text } = Typography;
 
@@ -13,6 +14,13 @@ const LeftSizeBar = () => {
     dispatch({
       type: UPDATE_COLOR_MAPPER,
       payload: {key, value}
+    })
+  }
+
+  const handlePaletteChange = (palette)=>{
+    dispatch({
+      type: APPLY_PALETTE,
+      payload: palette
     })
   }
 
@@ -49,7 +57,19 @@ const LeftSizeBar = () => {
               <Text className="card-head">PALETTES</Text>
               <div className="card-content">
                 <Space direction="vertical" size="middle" className="w-full">
-                  color paltettes
+                  {
+                    state.palettes.map((item, i)=>(
+                      <Button style={{borderLeft: `2px solid ${item[0]}`}}
+                        className="palette-block"
+                        block
+                        key={i} 
+                        onClick={()=> handlePaletteChange(item)}
+                      >
+                        <Text className="palette-block-title"> {`#${i}`} </Text>
+                        <ColorGroup items={item} />
+                      </Button>
+                    ))
+                  }
                 </Space>
               </div>
             </Space>

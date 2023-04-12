@@ -18,7 +18,7 @@ import {
   replaceAllStringColor,
   svgToBase64,
 } from "../library/helper";
-import { hexToRgbObj, rbgToHex } from "../library/colorConver";
+import { hexToRgbObj, rgbToHex } from "../library/colorConver";
 import { closestColor } from "../library/colorDiff";
 
 export const initialState = {
@@ -92,8 +92,11 @@ export const svgEditReducer = (state = initialState, action) => {
         break;
       case APPLY_PALETTE:
         appyPalette(action.payload, draft); 
+        makeHistory(draft);
+        break;
       case PALETTES:
         draft.palettes = action.payload;
+        break;
     default:
         return draft;
     }
@@ -107,8 +110,8 @@ const appyPalette = (palette, stateCopy)=>{
     for(const key in colorMapper){
         const inputColor = hexToRgbObj(key)
         const outputColorRgb = closestColor(inputColor, rgbPalette)
-        const rbgArray = Object.values(outputColorRgb)
-        const hexColor = rbgToHex(rbgArray)
+        const rgbArray = Object.values(outputColorRgb)
+        const hexColor = rgbToHex(rgbArray)
         updateObj[key] = `#${hexColor}`;
     }
     

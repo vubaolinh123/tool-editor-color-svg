@@ -36,8 +36,8 @@ export default function Home() {
 
   return (
     <SvgEditContext.Provider value={[state, dispatch]}>
-      <div className="w-[95%] mx-auto my-5 bg-white rounded-md">
-        <div className="px-4 py-4 w-full flex justify-between">
+      <div className="header-container">
+        <div className="header-main">
           <div>
             <i className="bi bi-pencil-square"></i>
             <span className="font-bold pl-2">Tool Editor</span>

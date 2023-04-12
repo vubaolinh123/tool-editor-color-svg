@@ -22,9 +22,10 @@ const Uploads = ({getUploadedFile, getUploadedSvgData, size = "large"}) => {
     }
 
     const getBase64 = (img, callback)=>{
+        console.log("IMAGE",img)
         const reader = new FileReader()
         reader.addEventListener("load",()=> callback(reader.result))
-        reader.readAsDataURL(img)
+        reader.readAsDataURL(img instanceof Blob ? img : img.file)
     }
 
     const getSvg = (img, callback)=>{
@@ -34,17 +35,18 @@ const Uploads = ({getUploadedFile, getUploadedSvgData, size = "large"}) => {
     }
 
     const handleChange = (info) => {
+        console.log("info",info)
         if(info.file.status === "uploading"){
             setLoading(true)
             return
         }
 
-        getBase64(info.file.originFileObj, (url)=>{
+        getBase64(info.file.originFileObj ? info.file.originFileObj : info.file, (url)=>{
             setLoading(false)
             getUploadedFile(url)
         })
 
-        getSvg(info.file.originFileObj, (svgData)=>{
+        getSvg(info.file.originFileObj ? info.file.originFileObj : info.file, (svgData)=>{
             getUploadedSvgData(svgData)
         })
     }

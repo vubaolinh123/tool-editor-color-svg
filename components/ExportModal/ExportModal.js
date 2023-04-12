@@ -34,9 +34,9 @@ const ExportModal = () => {
 
   const handleExport = async (key, payload = {}) => {
     if(key === "SVG"){
-      dowloadSVGAsText(state.updatedSvg) 
+      dowloadSVGAsText(state.updatedSvg ? state.updatedSvg : state.originalSvg) 
     }else if(key === "IMAGE"){
-      dowloadSVGAsImage(state.updatedSvg, payload)
+      dowloadSVGAsImage(state.updatedSvg ? state.updatedSvg : state.originalSvg, payload)
     }
   };
 

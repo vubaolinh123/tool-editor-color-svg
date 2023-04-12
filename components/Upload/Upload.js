@@ -19,9 +19,11 @@ const Uploads = ({getUploadedFile, getUploadedSvgData, size = "large"}) => {
         if(!isLargeFile){
             message.error("SVG must be smaller than 5MB !")
             setMiddlewareUpload(false)
+        }else{
+            setMiddlewareUpload(true)
         }
 
-        return isLargeFile
+        return isLargeFile 
     }
 
     const getBase64 = (img, callback)=>{

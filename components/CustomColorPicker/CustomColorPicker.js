@@ -1,31 +1,12 @@
+import { Input, Space } from "antd";
 import dynamic from "next/dynamic";
 import React, { useEffect } from "react";
-import { CustomPicker } from "react-color";
+import { CirclePicker, CustomPicker } from "react-color";
 import {
   EditableInput,
   Hue,
   Saturation,
 } from "react-color/lib/components/common";
-
-const { Input, Space } = dynamic(
-  () => import("antd"),
-  {
-    ssr: true,
-    loading: () => {
-      return <div>Loading...</div>;
-    },
-  }
-);
-
-const { CirclePicker } = dynamic(
-  () => import("react-color"),
-  {
-    ssr: true,
-    loading: () => {
-      return <div>Loading...</div>;
-    },
-  }
-);
 
 const CustomColorPicker = ({
   color,
@@ -34,10 +15,9 @@ const CustomColorPicker = ({
   captureChange,
   ...props
 }) => {
-
-  useEffect(()=>{
-    getHexCode(props.hex)
-  },[props.hex])
+  useEffect(() => {
+    getHexCode(props.hex);
+  }, [props.hex]);
 
   const handleOnMouseDown = () => {
     captureChange();
@@ -56,16 +36,31 @@ const CustomColorPicker = ({
   };
 
   const saturationPicker = () => {
-    return <div className="saturation-picker-pointer"/>
+    return <div className="saturation-picker-pointer" />;
   };
 
-  const otherPointer = ()=>{
-    return <div className="other-picker-pointer"/>
-  }
+  const otherPointer = () => {
+    return <div className="other-picker-pointer" />;
+  };
 
-  const handleChangeInput = (data)=>{
-    handleChange(data)
-    captureChange()
+  const handleChangeInput = (data) => {
+    handleChange(data);
+    captureChange();
+  };
+
+  const listStyle = {
+    wrap: {
+      flex: 1,
+      width: "100%",
+    },
+    input: {
+      height: 32,
+      width: "100%",
+      border: "1px solid #d9d9d9",
+      borderRadius: "5px 0 0 5px",
+      paddingLeft: "10px",
+      background: "#fafafc",
+    },
   }
 
   return (
@@ -89,7 +84,7 @@ const CustomColorPicker = ({
             onChangeComplete={handleChangeCirclePicker}
             circleSize={16}
             circleSpacing={11}
-            color={[
+            colors={[
               "#f44336",
               "#e91e63",
               "#9c27b0",
@@ -100,40 +95,29 @@ const CustomColorPicker = ({
             ]}
           />
         </div>
-        <div className="hue-picker"
-            onMouseDown={handleOnMouseDown}
-            onMouseUp={handleOnMouseUp}
+        <div
+          className="hue-picker"
+          onMouseDown={handleOnMouseDown}
+          onMouseUp={handleOnMouseUp}
         >
-            <Hue {...props} onChange={handleChange} pointer={otherPointer} />
+          <Hue {...props} onChange={handleChange} pointer={otherPointer} />
         </div>
         <div className="text-picker">
-            <Space direction="horizontal">
-                <Input.Group compact className="text-picker-input-group">
-                    <EditableInput
-                      style={{
-                        wrap:{
-                            flex: 1,
-                            width: "100%",
-                        },
-                        input:{
-                            height: 32,
-                            width: "100%",
-                            border: "1px solid #d9d9d9",
-                            borderRadius: "5px 0 0 5px",
-                            paddingLeft: "10px",
-                            background: "#fafafc",
-                        }
-                      }}
-                      value={props.hex}
-                      onChange={handleChangeInput}
-                    />
-                </Input.Group>
-                <div style={{background: props.hex}}  className="color-preview" />
-            </Space>
+          <Space direction="horizontal">
+            <div className="text-picker-input-group" >
+              <EditableInput
+                style={listStyle}
+                lable="hex"
+                value={props.hex}
+                onChange={handleChangeInput}
+              />
+            </div>
+            <div style={{ background: props.hex }} className="color-preview" />
+          </Space>
         </div>
       </Space>
     </div>
   );
 };
 
-export default CustomPicker(CustomColorPicker) ;
+export default CustomPicker(CustomColorPicker);

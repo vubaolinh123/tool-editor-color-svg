@@ -158,7 +158,7 @@ const makeHistory = (stateCopy) => {
     0,
     stateCopy.history.undoIdx + 1
   );
-  stateCopy.history.history = newHistory.contcat([
+  stateCopy.history.history = newHistory.concat([
     {
       updatedSvg: stateClone.updatedSvg,
       imageUrl: stateClone.imageUrl,

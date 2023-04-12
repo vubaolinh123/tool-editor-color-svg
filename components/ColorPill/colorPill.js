@@ -29,8 +29,8 @@ const ColorPill = ({pillColor, handleColorChange, captureChange}) => {
             getPopupContainer={(triggerNode)=> triggerNode}
             overlayClassName="color-pill-popover"
             placement="bottom"
-            content={
-                <CustomColorPicker 
+            content={ 
+                <CustomColorPicker  
                     color={color}
                     updateColorPicker={updateColorPicker}
                     getHexCode={getHexCode}

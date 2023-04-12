@@ -28,7 +28,7 @@ const LeftSizeBar = () => {
                 <Space wrap>
                   {
                     state.colorMapper &&
-                    Object.keys(state.colorMapper).map((key, i) => {
+                    Object.keys(state.colorMapper).map((key, i) => (
                       <ColorPill 
                         key={i}
                         pillColor={state.colorMapper[key]}
@@ -39,7 +39,7 @@ const LeftSizeBar = () => {
                           })
                         }}
                       />
-                    })
+                    ))
                   }
                 </Space>
               </div>

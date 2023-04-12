@@ -4,25 +4,27 @@ import {LoadingOutlined, PlusOutlined} from "@ant-design/icons"
 
 const Uploads = ({getUploadedFile, getUploadedSvgData, size = "large"}) => {
     const [loading, setLoading] = useState(false)
+    const [middlewareUpload, setMiddlewareUpload] = useState(true)
 
     const beforeUpload = (file) => {
-        const isSvgImg = file.type === "image/svg+xml"
+        // const isSvgImg = file.type === "image/svg+xml"
 
-        if(!isSvgImg){
-            message.error("You can only upload SVG file")
-        }
+        // if(!isSvgImg){
+        //     message.error("You can only upload SVG file")
+        //     return
+        // }
 
-        const isLargeFile = file.size / 1024 / 1024 < 2
+        const isLargeFile = file.size / 1024 / 1024 < 5
 
         if(!isLargeFile){
-            message.error("SVG must be smaller than 2MB !")
+            message.error("SVG must be smaller than 5MB !")
+            setMiddlewareUpload(false)
         }
 
-        return isSvgImg && isLargeFile
+        return isLargeFile
     }
 
     const getBase64 = (img, callback)=>{
-        console.log("IMAGE",img)
         const reader = new FileReader()
         reader.addEventListener("load",()=> callback(reader.result))
         reader.readAsDataURL(img instanceof Blob ? img : img.file)
@@ -35,20 +37,21 @@ const Uploads = ({getUploadedFile, getUploadedSvgData, size = "large"}) => {
     }
 
     const handleChange = (info) => {
-        console.log("info",info)
-        if(info.file.status === "uploading"){
-            setLoading(true)
-            return
+        if(middlewareUpload){
+            if(info.file.status === "uploading"){
+                setLoading(true)
+                return
+            }
+
+            getBase64(info.file.originFileObj ? info.file.originFileObj : info.file, (url)=>{
+                setLoading(false)
+                getUploadedFile(url)
+            })
+    
+            getSvg(info.file.originFileObj ? info.file.originFileObj : info.file, (svgData)=>{
+                getUploadedSvgData(svgData)
+            })
         }
-
-        getBase64(info.file.originFileObj ? info.file.originFileObj : info.file, (url)=>{
-            setLoading(false)
-            getUploadedFile(url)
-        })
-
-        getSvg(info.file.originFileObj ? info.file.originFileObj : info.file, (svgData)=>{
-            getUploadedSvgData(svgData)
-        })
     }
 
     const uploadButton = (

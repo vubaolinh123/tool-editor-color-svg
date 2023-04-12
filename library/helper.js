@@ -91,5 +91,11 @@ export const replaceAllStringColor = (svgString, map) => {
 
 
 export const svgToBase64 = (svgString) => {
-    return "data:image/svg+xml;base64," + window.btoa(svgString)
+  const encoder = new TextEncoder('iso-8859-1')
+    const latin1Array = encoder.encode(svgString)
+    let latin1String = ''
+    for (let i = 0; i < latin1Array.length; i++) {
+        latin1String += String.fromCharCode(latin1Array[i])
+    }
+    return "data:image/svg+xml;base64," + window.btoa(latin1String)
 }

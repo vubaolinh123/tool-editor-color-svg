@@ -1,12 +1,28 @@
 import { Row, Col, Space, Divider, Button } from "antd";
 import ButtonGroup from "antd/lib/button/button-group";
 import { ArrowLeftOutlined, ArrowRightOutlined } from "@ant-design/icons";
-import React, { useRef } from "react";
+import React, { useContext, useRef } from "react";
 import Image from "next/image";
 import LeftSizeBar from "../LeftSizeBar/LeftSizeBar";
+import SvgEditContext from "../../context/svgEditContex";
+import { OPEN_EXPORT_MODAL, REDO, RESET_IMAGE, UNDO } from "../../constants/actionTypes";
+import ExportModal from "../ExportModal/ExportModal";
 
 const EditContainer = ({ data }) => {
   const editImageContainerRef = useRef(null);
+  const [,dispatch] = useContext(SvgEditContext)
+
+  const reset = ()=>{
+    dispatch({
+      type: RESET_IMAGE,
+    })
+  }
+
+  const handleExport = ()=>{
+    dispatch({
+      type: OPEN_EXPORT_MODAL,
+    })
+  }
 
   return (
     <>
@@ -27,10 +43,18 @@ const EditContainer = ({ data }) => {
                   split={<Divider type="vertical"></Divider>}
                 >
                   <ButtonGroup>
-                    <Button>
+                    <Button
+                      onClick={()=>{
+                        dispatch({type: UNDO})
+                      }}
+                    >
                       <ArrowLeftOutlined />
                     </Button>
-                    <Button>
+                    <Button
+                      onClick={()=>{
+                        dispatch({type: REDO})
+                      }}
+                    >
                       <ArrowRightOutlined />
                     </Button>
                   </ButtonGroup>
@@ -38,8 +62,12 @@ const EditContainer = ({ data }) => {
               </Col>
               <Col span={12} className="edit-main-header-right-size">
                 <Space>
-                  <Button size="medium">Reset</Button>
-                  <Button type="primary">Export</Button>
+                  <Button size="medium" onClick={reset}>
+                    Reset
+                    </Button>
+                  <Button type="primary" onClick={handleExport}>
+                    Export
+                  </Button>
                 </Space>
               </Col>
             </Row>
@@ -51,6 +79,7 @@ const EditContainer = ({ data }) => {
           </div>
         </Col>
       </Row>
+      <ExportModal />
     </>
   );
 };

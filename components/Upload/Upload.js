@@ -14,10 +14,10 @@ const Uploads = ({getUploadedFile, getUploadedSvgData, size = "large"}) => {
         //     return
         // }
 
-        const isLargeFile = file.size / 1024 / 1024 < 5
+        const isLargeFile = file.size / 1024 / 1024 < 30
 
         if(!isLargeFile){
-            message.error("SVG must be smaller than 5MB !")
+            message.error("SVG must be smaller than 30MB !")
             setMiddlewareUpload(false)
         }else{
             setMiddlewareUpload(true)

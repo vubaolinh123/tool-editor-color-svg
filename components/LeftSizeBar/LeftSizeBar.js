@@ -42,9 +42,9 @@ const LeftSizeBar = () => {
                         pillColor={state.colorMapper[key]}
                         handleColorChange={(value)=> HandleColorChange(key, value)}
                         captureChange={()=> {
-                          dispatch({
-                            type: MAKE_HISTORY
-                          })
+                          // dispatch({
+                          //   type: MAKE_HISTORY
+                          // })
                         }}
                       />
                     ))

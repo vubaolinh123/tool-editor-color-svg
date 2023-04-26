@@ -38,12 +38,28 @@ const Uploads = ({getUploadedFile, getUploadedSvgData, size = "large"}) => {
         reader.readAsText(img)
     }
 
-    const handleChange = (info) => {
+    const getBase64FromAmazonSVG = async (url) => {
+        const response = await fetch(url);
+        const blob = await response.blob();
+      
+        return new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(blob);
+          reader.onloadend = () => {
+            const base64data = reader.result;
+            resolve(base64data);
+          };
+        });
+      };
+
+    const handleChange = async (info) => {
         if(middlewareUpload){
             if(info.file.status === "uploading"){
                 setLoading(true)
                 return
             }
+            // const url = 'http://45.76.156.10/test-wp/wp-content/uploads/2023/04/Colorful-stationery-icons-13.svg';
+            // const base64data = await getBase64FromAmazonSVG(url);
 
             getBase64(info.file.originFileObj ? info.file.originFileObj : info.file, (url)=>{
                 setLoading(false)
